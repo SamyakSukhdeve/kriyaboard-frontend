@@ -1,5 +1,4 @@
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
 const firebaseConfig = {
   apiKey: "AIzaSyDExn-R-0fZ8ad54pcLF0QBiHO-PHXzm5M",
   authDomain: "kanban-8bd0d.firebaseapp.com",
@@ -12,4 +11,7 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+import { getAuth, GoogleAuthProvider, GithubAuthProvider } from "firebase/auth";
+export const auth = getAuth(app);
+export const googleProvider = new GoogleAuthProvider();
+export const githubProvider = new GithubAuthProvider();

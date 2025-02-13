@@ -1,8 +1,10 @@
 import Button from "../components/button";
 import FeatureCard from "../components/FeatureCard";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Landing = () => {
+  const naviagtor = useNavigate();
+
   return (
     <div className="flex flex-col justify-center items-center min-h-svh">
       <div className="container mx-10 max-w-5xl text-center flex flex-col items-center ">
@@ -17,7 +19,7 @@ const Landing = () => {
           place!
         </p>
       </div>
-      <Button title="Get Started" onClick={() => null} />
+      <Button title="Get Started" onClick={() => naviagtor("/signup")} />
       <div className="grid grid-cols-2 sm:mx-6 lg:grid-cols-4 lg:mx-40 mx-4 my-10 gap-2">
         <FeatureCard
           icon="src/assets/thunder.svg"
