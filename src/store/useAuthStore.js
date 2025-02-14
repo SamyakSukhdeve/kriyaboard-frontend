@@ -14,7 +14,8 @@ const useAuthStore = create((set) => ({
         photoURL: result.user.photoURL,
       };
       localStorage.setItem("user", JSON.stringify(userData));
-      set({ user: result?.user });
+      
+  
     } catch (error) {
       console.log(error);
     }
@@ -28,7 +29,6 @@ const useAuthStore = create((set) => ({
         photoURL: result.user.photoURL,
       };
       localStorage.setItem("user", JSON.stringify(userData));
-      set({ user: result?.user });
     } catch (error) {
       console.log(error);
     }

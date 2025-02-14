@@ -11,11 +11,11 @@ const Signup = () => {
     if (user) {
       navigate("/dashboard");
     }
-  }, []);
+  }, [user, navigate]);
 
   return (
     <div className="flex justify-center flex-col items-center min-h-svh">
-      <span className="p-5">Signup</span>
+      <span className="py-10 text-2xl">SignUp or LogIn</span>
       <div className="grid md:grid-cols-2 gap-6">
         <div className="flex flex-col justify-center bg-amber-50 p-5 rounded gap-5">
           <img src="/src/assets/google.svg" className="h-8" alt="" />
@@ -27,7 +27,7 @@ const Signup = () => {
         <div className="flex flex-col justify-center bg-amber-50 p-5 rounded gap-5">
           <img src="/src/assets/github.svg" className="h-8" alt="" />
           <Button
-            title="Sign up with Githun"
+            title="Sign up with Github"
             onClick={signUpWithGitHub}
           ></Button>
         </div>
