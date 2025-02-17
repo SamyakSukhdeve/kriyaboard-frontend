@@ -1,4 +1,9 @@
 import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
+import { getAuth, GoogleAuthProvider, GithubAuthProvider } from "firebase/auth";
+
+
+
 const firebaseConfig = {
   apiKey: "AIzaSyDExn-R-0fZ8ad54pcLF0QBiHO-PHXzm5M",
   authDomain: "kanban-8bd0d.firebaseapp.com",
@@ -11,7 +16,7 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-import { getAuth, GoogleAuthProvider, GithubAuthProvider } from "firebase/auth";
 export const auth = getAuth(app);
+export const db = getFirestore(app);
 export const googleProvider = new GoogleAuthProvider();
 export const githubProvider = new GithubAuthProvider();

@@ -1,6 +1,8 @@
 import { signInWithPopup, signOut, onAuthStateChanged } from "firebase/auth";
 import { create } from "zustand";
 import { auth, githubProvider, googleProvider } from "../config/firebase";
+import { db } from "../config/firebase";
+import { addDoc, collection } from "firebase/firestore";
 
 const useAuthStore = create((set) => ({
   user: JSON.parse(localStorage.getItem("user")) || null,
@@ -14,8 +16,12 @@ const useAuthStore = create((set) => ({
         photoURL: result.user.photoURL,
       };
       localStorage.setItem("user", JSON.stringify(userData));
-      
-  
+      try {
+        const userCollection = collection(db, "users");
+        const userDoc = await addDoc(userCollection, userData);
+      } catch (error) {
+        console.log(error);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -29,6 +35,12 @@ const useAuthStore = create((set) => ({
         photoURL: result.user.photoURL,
       };
       localStorage.setItem("user", JSON.stringify(userData));
+      try {
+        const userCollection = collection(db, "users");
+        const userDoc = await addDoc(userCollection, userData);
+      } catch (error) {
+        console.log(error);
+      }
     } catch (error) {
       console.log(error);
     }

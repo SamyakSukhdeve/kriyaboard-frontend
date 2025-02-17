@@ -1,11 +1,11 @@
 import AppSideBar from "@/components/AppSideBar";
 import { SidebarProvider, SidebarTrigger } from "../components/ui/sidebar";
 
-const Layout = ({ children }) => {
+const Layout = ({ children, ref }) => {
   return (
     <div>
       <SidebarProvider>
-        <AppSideBar />
+        <AppSideBar ref={ref} />
         <main>
           <SidebarTrigger />
           {children}
