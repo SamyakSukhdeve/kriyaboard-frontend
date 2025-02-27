@@ -1,6 +1,6 @@
 import useAuthStore from "@/store/useAuthStore";
-import { Timer, ChartNoAxesColumnIncreasing } from "lucide-react";
-const TaskCard = ({ date, projectName, taskName }) => {
+import { Timer,  } from "lucide-react";
+const TaskCard = ({ date, projectName, taskName,priority,dueDate }) => {
   const { user } = useAuthStore();
   return (
     <div className="flex w-[350px] flex-col bg-white m-2 px-3 py-1 gap-2 rounded border-t-3 border-green-500">
@@ -13,10 +13,10 @@ const TaskCard = ({ date, projectName, taskName }) => {
       <span className="font-medium text-sm">{taskName}</span>
       <div className="flex flex-row items-center justify-between">
         <div className="flex gap-3">
-          <span className="text-[12px] font-light text-red-500">High</span>
+          <span className="text-[12px] font-light text-red-500">{priority}</span>
           <div className="flex">
             <Timer size={16} />{" "}
-            <span className="text-[12px] font-light">Today</span>
+            <span className="text-[12px] font-light">{dueDate}</span>
           </div>
         </div>
         <div className=" h-7 w-7 rounded-full">

@@ -1,11 +1,11 @@
 import AppSideBar from "@/components/AppSideBar";
 import { SidebarProvider, SidebarTrigger } from "../components/ui/sidebar";
 
-const Layout = ({ children, ref }) => {
+const Layout = ({ children, toggleProjectDialog }) => {
   return (
     <div>
       <SidebarProvider>
-        <AppSideBar ref={ref} />
+        <AppSideBar toggleProjectDialog={toggleProjectDialog} />
         <main>
           <SidebarTrigger />
           {children}

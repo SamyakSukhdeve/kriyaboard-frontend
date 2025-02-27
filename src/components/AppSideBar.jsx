@@ -16,7 +16,7 @@ import { SquareChevronRight } from "lucide-react";
 import UserInfo from "./UserInfo";
 import FooterSidebar from "./FooterSidebar";
 
-const AppSideBar = ({ ref }) => {
+const AppSideBar = ({ ref, toggleProjectDialog }) => {
   const items = [
     {
       title: "Code Eval Ai",
@@ -40,16 +40,6 @@ const AppSideBar = ({ ref }) => {
     },
   ];
 
-  const toggleDialog = () => {
-    if (!ref.current) {
-      return;
-    }
-
-    ref.current.hasAttribute("open")
-      ? ref.current.close()
-      : ref.current.showModal();
-  };
-
   return (
     <Sidebar>
       <SidebarHeader className="p-0 m-0 gap-0">
@@ -66,7 +56,7 @@ const AppSideBar = ({ ref }) => {
             asChild
           >
             <div
-              onClick={toggleDialog}
+              onClick={toggleProjectDialog}
               className="flex flex-row justify-center items-center gap-2 cursor-pointer"
             >
               <span className="font-medium text-sm">New </span>
