@@ -16,24 +16,18 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { DialogDescription } from "@radix-ui/react-dialog";
-import useProjectStore from "@/store/useProjectStore";
+import useAuthStore from "@/store/useAuthStore";
 
-const AddTaskDialog = ({ onOpen, onClose }) => {
+const AddTaskDialog = ({ onOpen, onClose, projectId }) => {
   const { createTask, isLoading } = useTaskStore();
-  const { users } = useProjectStore();
+  const { users } = useAuthStore();
 
   const addTaskToDb = async (e) => {
     e.preventDefault();
     const formdata = new FormData(e.target);
     const data = Object.fromEntries(formdata);
     try {
-      const date = new Date(data.dueDate).toLocaleDateString("en-GB", {
-        day: "2-digit",
-        month: "short",
-        year: "2-digit",
-      });
-      data.dueDate = date;
-      await createTask(data);
+      await createTask(data, projectId);
       onClose(false);
     } catch (error) {
       console.log(error);
@@ -54,7 +48,7 @@ const AddTaskDialog = ({ onOpen, onClose }) => {
                 Task
               </label>
               <Input
-                className="h-8 rounded"
+                className="h-8 rounded text-black"
                 name="task"
                 placeholder="Enter Task"
                 required={true}
@@ -117,7 +111,10 @@ const AddTaskDialog = ({ onOpen, onClose }) => {
                 </SelectTrigger>
                 <SelectContent>
                   {users.map((u) => (
-                    <SelectItem value={u.id} key={u.id}>
+                    <SelectItem
+                      value={JSON.stringify({ photoURL: u.photoURL, id: u.id })}
+                      key={u.id}
+                    >
                       <div className="flex flex-row items-center gap-4">
                         <img
                           src={u.photoURL}
