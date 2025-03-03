@@ -2,6 +2,11 @@ import { Button } from "@/components/ui/button";
 import FeatureCard from "../components/FeatureCard";
 import { Link, useNavigate } from "react-router-dom";
 
+import thunder from "../assets/thunder.svg";
+import star from "../assets/star.svg";
+import hourglass from "../assets/hourglass.svg";
+import activity from "../assets/activity.svg";
+
 const Landing = () => {
   const naviagtor = useNavigate();
 
@@ -19,25 +24,27 @@ const Landing = () => {
           place!
         </p>
       </div>
-      <Button onClick={() => naviagtor("/signup")} variant={"secondary"}>Get Started</Button>
+      <Button onClick={() => naviagtor("/signup")} variant={"secondary"}>
+        Get Started
+      </Button>
       <div className="grid grid-cols-2 sm:mx-6 lg:grid-cols-4 lg:mx-40 mx-4 my-10 gap-2">
         <FeatureCard
-          icon="src/assets/thunder.svg"
+          icon={thunder}
           title="Simple & Powerful"
           subTitle="Create projects, add tasks, and move them around with drag & drop ease."
         />
         <FeatureCard
-          icon="src/assets/activity.svg"
+          icon={activity}
           title="Real-Time Team Collaboration"
           subTitle="Work together effortlessly—invite teammates, assign tasks, and stay in sync."
         />
         <FeatureCard
-          icon="src/assets/hourglass.svg"
+          icon={hourglass}
           title="Stay Organized, Work Smarter"
           subTitle="Prioritize tasks, set due dates, and keep your projects on track."
         />
         <FeatureCard
-          icon="src/assets/star.svg"
+          icon={star}
           title="Access Anytime, Anywhere"
           subTitle="Your work syncs in real-time with Cloud—no more lost progress!"
         />
