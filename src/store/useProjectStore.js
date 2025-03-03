@@ -1,7 +1,16 @@
 import { db } from "@/config/firebase";
-import { collection, addDoc, onSnapshot } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  onSnapshot,
+  where,
+  query,
+  or,
+} from "firebase/firestore";
 import { create } from "zustand";
 import useAuthStore from "./useAuthStore";
+
+const { user } = useAuthStore.getState();
 
 const useProjectStore = create((set) => ({
   projects: [],
@@ -10,8 +19,6 @@ const useProjectStore = create((set) => ({
   addProject: async (data) => {
     set({ isLoading: true });
     try {
-      const { user } = useAuthStore.getState();
-
       const projectRef = await addDoc(collection(db, "projects"), {
         projectName: data.projectName,
         createdBy: user.id,
@@ -30,10 +37,23 @@ const useProjectStore = create((set) => ({
   },
 
   getAllProject: async () => {
-    await onSnapshot(collection(db, "projects"), (data) => {
-      const project = data.docs.map((p) => ({ id: p.id, ...p.data() }));
-      set({ projects: project });
-    });
+    const projectCollectionRef = collection(db, "projects");
+    const q = query(
+      projectCollectionRef,
+      or(
+        where("createdBy", "==", user?.id),
+        where("members", "array-contains", user?.id)
+      )
+    );
+
+    try {
+      await onSnapshot(q, (data) => {
+        const projects = data.docs.map((p) => ({ id: p.id, ...p.data() }));
+        set({ projects: projects });
+      });
+    } catch (error) {
+      console.log("Error setting up snapshot listener:", error);
+    }
   },
 }));
 

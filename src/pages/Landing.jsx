@@ -1,4 +1,4 @@
-import Button from "../components/button";
+import { Button } from "@/components/ui/button";
 import FeatureCard from "../components/FeatureCard";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -19,7 +19,7 @@ const Landing = () => {
           place!
         </p>
       </div>
-      <Button title="Get Started" onClick={() => naviagtor("/signup")} />
+      <Button onClick={() => naviagtor("/signup")} variant={"secondary"}>Get Started</Button>
       <div className="grid grid-cols-2 sm:mx-6 lg:grid-cols-4 lg:mx-40 mx-4 my-10 gap-2">
         <FeatureCard
           icon="src/assets/thunder.svg"

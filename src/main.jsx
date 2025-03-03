@@ -5,7 +5,7 @@ import App from "./App.jsx";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Signup from "./pages/signup.jsx";
 import Protected from "./Protected.jsx";
-import Dashboard from "./pages/Dashboard.jsx";
+import DashBoard from "./pages/DashBoard";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -17,7 +17,7 @@ createRoot(document.getElementById("root")).render(
           path="/dashboard"
           element={
             <Protected>
-              <Dashboard />
+             <DashBoard></DashBoard>
             </Protected>
           }
         ></Route>

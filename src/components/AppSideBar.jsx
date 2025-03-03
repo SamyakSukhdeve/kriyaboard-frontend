@@ -8,15 +8,10 @@ import {
   SidebarGroupLabel,
   SidebarHeader,
   SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-  SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { Plus } from "lucide-react";
 import UserInfo from "./UserInfo";
 import FooterSidebar from "./FooterSidebar";
-import AddTaskDialog from "./AddTaskDialog";
-import AddProjectDialog from "./AddProjectDialog";
 
 const AppSideBar = ({ toggleProjectDialog, children }) => {
   return (
@@ -32,14 +27,14 @@ const AppSideBar = ({ toggleProjectDialog, children }) => {
             </SidebarGroupLabel>
             <SidebarGroupAction
               title="Add Project"
-              className="h-5 w-5 px-3 py-1 bg-gray-200 hover:bg-gray-300"
+              className="h-5 w-5 px-3 py-1 bg-gray-200 hover:bg-gray-300 rounded"
               asChild
             >
               <div
                 onClick={toggleProjectDialog}
-                className="flex flex-row justify-center items-center gap-2 cursor-pointer"
+                className="flex flex-row justify-center  items-center gap-2 cursor-pointer"
               >
-                <span className="font-medium text-sm">New </span>
+                <span className="font-normal text-sm">New </span>
                 <Plus className="h-4 w-4" />{" "}
                 <span className="sr-only">Add Project</span>
               </div>

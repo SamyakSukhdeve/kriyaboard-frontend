@@ -8,7 +8,7 @@ const TaskCard = ({
   photoURL,
 }) => {
   return (
-    <div className="flex w-[350px] flex-col bg-white m-2 px-3 py-1 gap-2 rounded border-t-3 border-green-500">
+    <div className="flex w-[350px] flex-col cursor-grab  bg-white m-1  px-3 py-1 gap-2 rounded border-t-3 border-green-500">
       <div className="flex justify-between">
         <span className="text-[12px]">{createdAt}</span>
         <span className="text-[12px] font-medium text-green-500">
@@ -18,7 +18,13 @@ const TaskCard = ({
       <span className="font-medium text-sm">{taskName}</span>
       <div className="flex flex-row items-center justify-between">
         <div className="flex gap-3">
-          <span className="text-[12px] font-light text-red-500">
+          <span
+            className={`text-[12px] font-light ${
+              priority === "High" ? "text-red-500" : ""
+            } ${priority === "Medium" ? "text-blue-500" : ""} ${
+              priority === "Low" ? "text-green-500" : ""
+            } `}
+          >
             {priority}
           </span>
           <div className="flex">

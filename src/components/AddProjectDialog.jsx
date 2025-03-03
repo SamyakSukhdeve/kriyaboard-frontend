@@ -12,6 +12,7 @@ import { useState } from "react";
 import Select from "react-select";
 import useProjectStore from "@/store/useProjectStore";
 import useAuthStore from "@/store/useAuthStore";
+import { LoaderCircle } from "lucide-react";
 
 const AddProjectDialog = ({ onOpen, onClose }) => {
   const { addProject, isLoading } = useProjectStore();
@@ -92,8 +93,7 @@ const AddProjectDialog = ({ onOpen, onClose }) => {
               <div className="flex flex-row items-center gap-2">
                 <span>Add Project</span>
                 {isLoading && (
-                  <img
-                    src="/src/assets/google.svg"
+                  <LoaderCircle
                     className={`h-3 w-3 ${isLoading && "animate-spin"}`}
                   />
                 )}

@@ -1,13 +1,19 @@
 import { create } from "zustand";
 
 import { db } from "@/config/firebase";
-import { addDoc, collection, onSnapshot } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  doc,
+  onSnapshot,
+  updateDoc,
+} from "firebase/firestore";
 
 const useTaskStore = create((set) => ({
   isLoading: false,
   tasks: [],
 
-  createTask: async (taskData, projectId) => {
+  createTask: async (taskData, projectData) => {
     set({ isLoading: true });
 
     try {
@@ -27,9 +33,8 @@ const useTaskStore = create((set) => ({
         }),
         status: "To Do",
         assignTo: JSON.parse(taskData.assignTo),
-        projectId: projectId,
+        project: JSON.parse(projectData),
       });
-      console.log(taskDoc);
       set({ isLoading: false });
     } catch (error) {
       console.log(error);
@@ -42,6 +47,18 @@ const useTaskStore = create((set) => ({
       const tasks = data.docs.map((t) => ({ id: t.id, ...t.data() }));
       set({ tasks: tasks });
     });
+  },
+
+  updateTaskStatus: async (taskId, newStatus) => {
+    set({ isLoading: true });
+    try {
+      const taskRef = doc(db, "tasks", taskId);
+      await updateDoc(taskRef, { status: newStatus });
+      set({ isLoading: false });
+    } catch (error) {
+      set({ isLoading: false });
+      console.log(error);
+    }
   },
 }));
 

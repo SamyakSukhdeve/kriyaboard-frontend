@@ -2,22 +2,26 @@ import { signInWithPopup, signOut, onAuthStateChanged } from "firebase/auth";
 import { create } from "zustand";
 import { auth, githubProvider, googleProvider } from "../config/firebase";
 import { db } from "../config/firebase";
-import { addDoc, collection, doc, getDocs, setDoc } from "firebase/firestore";
+import { collection, doc, onSnapshot, setDoc } from "firebase/firestore";
 
 const useAuthStore = create((set) => ({
   user: JSON.parse(localStorage.getItem("user")) || null,
   users: [],
 
   getAllUsers: async () => {
-    const querySnapshot = await getDocs(collection(db, "users"));
-    const users = querySnapshot.docs.map((u) => ({ id: u.id, ...u.data() }));
-    set({ users: users });
+    try {
+      await onSnapshot(collection(db, "users"), (user) => {
+        const users = user.docs.map((u) => ({ id: u.id, ...u.data() }));
+        set({ users: users });
+      });
+    } catch (error) {
+      console.log(error);
+    }
   },
 
   signUpWithGoogle: async () => {
     try {
       const result = await signInWithPopup(auth, googleProvider);
-      console.log(result);
       const userData = {
         id: result.user.uid,
         displayName: result.user.displayName,
@@ -25,6 +29,7 @@ const useAuthStore = create((set) => ({
         photoURL: result.user.photoURL,
       };
       localStorage.setItem("user", JSON.stringify(userData));
+
       try {
         const userCollection = collection(db, "users");
         const userDocRef = doc(userCollection, result.user.uid);
@@ -51,7 +56,6 @@ const useAuthStore = create((set) => ({
         const userCollection = collection(db, "users");
         const userDocRef = doc(userCollection, result.user.uid);
         await setDoc(userDocRef, userData, { merge: true });
-        console.log("User data saved to Firestore");
       } catch (error) {
         console.log(error);
       }

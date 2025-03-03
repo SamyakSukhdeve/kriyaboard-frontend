@@ -17,17 +17,21 @@ import {
 } from "@/components/ui/select";
 import { DialogDescription } from "@radix-ui/react-dialog";
 import useAuthStore from "@/store/useAuthStore";
+import { LoaderCircle } from "lucide-react";
 
-const AddTaskDialog = ({ onOpen, onClose, projectId }) => {
+const AddTaskDialog = ({ onOpen, onClose, projectData, members }) => {
   const { createTask, isLoading } = useTaskStore();
   const { users } = useAuthStore();
+
+  const projectMembers = members[0].members;
+  const memberUser = users.filter((u) => projectMembers.includes(u.id));
 
   const addTaskToDb = async (e) => {
     e.preventDefault();
     const formdata = new FormData(e.target);
     const data = Object.fromEntries(formdata);
     try {
-      await createTask(data, projectId);
+      await createTask(data, projectData);
       onClose(false);
     } catch (error) {
       console.log(error);
@@ -110,7 +114,7 @@ const AddTaskDialog = ({ onOpen, onClose, projectId }) => {
                   <SelectValue placeholder="Select User" />
                 </SelectTrigger>
                 <SelectContent>
-                  {users.map((u) => (
+                  {memberUser.map((u) => (
                     <SelectItem
                       value={JSON.stringify({ photoURL: u.photoURL, id: u.id })}
                       key={u.id}
@@ -134,8 +138,7 @@ const AddTaskDialog = ({ onOpen, onClose, projectId }) => {
                 <div className="flex flex-row items-center gap-2">
                   <span>Add Task</span>
                   {isLoading && (
-                    <img
-                      src="/src/assets/google.svg"
+                    <LoaderCircle
                       className={`h-3 w-3 ${isLoading && "animate-spin"}`}
                     />
                   )}
