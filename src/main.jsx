@@ -3,8 +3,8 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.jsx";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Signup from "./pages/signup.jsx";
-import Protected from "./Protected.jsx";
+import Signup from "./pages/signup";
+import Protected from "./Protected";
 import DashBoard from "./pages/DashBoard";
 
 createRoot(document.getElementById("root")).render(
@@ -17,7 +17,7 @@ createRoot(document.getElementById("root")).render(
           path="/dashboard"
           element={
             <Protected>
-             <DashBoard></DashBoard>
+              <DashBoard></DashBoard>
             </Protected>
           }
         ></Route>
