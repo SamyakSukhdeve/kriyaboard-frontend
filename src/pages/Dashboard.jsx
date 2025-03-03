@@ -1,7 +1,7 @@
 import Layout from "./Layout";
 
-const DashBoard = () => {
+const Dashboard = () => {
   return <Layout></Layout>;
 };
 
-export default DashBoard;
+export default Dashboard;
