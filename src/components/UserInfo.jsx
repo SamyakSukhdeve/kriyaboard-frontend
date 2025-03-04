@@ -4,7 +4,7 @@ const UserInfo = () => {
   const { user } = useAuthStore();
   return (
     <div>
-      <div className="flex flex-row justify-center gap-2 p-2 ">
+      <div className="flex flex-row justify-start gap-2 p-2 ">
         <div className=" h-12 w-12 rounded-full">
           <img src={user.photoURL} className="object-fill rounded-full " />
         </div>
