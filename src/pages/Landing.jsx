@@ -12,6 +12,16 @@ const Landing = () => {
 
   return (
     <div className=" flex flex-col min-h-svh justify-center ">
+      <header className="">
+        <div className="container p-4">
+          <Link
+            to="/"
+            className="text-xl italic sm:text-2xl font-semibold text-primary"
+          >
+            Kriya Board
+          </Link>
+        </div>
+      </header>
       <div className="flex flex-col justify-center items-center grow ">
         <div className="container mt-5 text-center flex flex-col items-center ">
           <span className="text-[18px]  font-medium  italic mx-2 sm:text-3xl lg:text-4xl lg:mx-10 xl:mx-70 xl:font-bold ">

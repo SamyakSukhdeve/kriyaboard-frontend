@@ -9,7 +9,7 @@ const UserInfo = () => {
           <img src={user.photoURL} className="object-fill rounded-full " />
         </div>
         <div className="flex flex-col justify-center ">
-          <span className="text-[14px]] font-medium">{user.displayName}</span>
+          <span className="text-[14px] font-medium">{user.displayName}</span>
           <span className="text-[10px] font-medium">{user.email}</span>
         </div>
       </div>
